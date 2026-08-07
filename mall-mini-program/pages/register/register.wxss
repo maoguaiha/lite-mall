@@ -1,0 +1,37 @@
+.auth {
+  min-height: 100vh;
+  padding: 100rpx 60rpx;
+  background-color: #fff;
+}
+.logo {
+  font-size: 120rpx;
+  text-align: center;
+}
+.title {
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #2ab795;
+  margin-bottom: 70rpx;
+}
+.form-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+}
+.prefix { font-size: 36rpx; margin-right: 20rpx; }
+.input {
+  flex: 1;
+  font-size: 30rpx;
+}
+.submit {
+  margin-top: 50rpx;
+}
+.switch {
+  text-align: center;
+  font-size: 26rpx;
+  color: #2ab795;
+  margin-top: 40rpx;
+}

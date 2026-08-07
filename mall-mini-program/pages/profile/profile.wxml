@@ -1,0 +1,69 @@
+<view class="profile">
+  <!-- 未登录 -->
+  <view wx:if="{{!isLogin}}" class="header not-login">
+    <view class="avatar">👤</view>
+    <view class="header-info">
+      <view class="nickname">游客</view>
+      <view class="tip">登录后享受更多权益</view>
+    </view>
+    <view class="auth-btns">
+      <view class="btn-primary login-btn" bindtap="goLogin">登录</view>
+      <view class="btn-ghost reg-btn" bindtap="goRegister">注册</view>
+    </view>
+  </view>
+
+  <!-- 已登录 -->
+  <view wx:else class="header logged">
+    <view class="avatar">😊</view>
+    <view class="header-info">
+      <view class="nickname">{{member.nickname || member.username}}</view>
+      <view class="tip">用户名：{{member.username}}</view>
+    </view>
+  </view>
+
+  <!-- 订单入口 -->
+  <view class="card order-entry">
+    <view class="entry-head" bindtap="goAllOrders">
+      <text class="entry-title">我的订单</text>
+      <text class="entry-more">全部订单 ›</text>
+    </view>
+    <view class="entry-grid">
+      <view
+        class="entry-item"
+        wx:for="{{orders}}"
+        wx:key="label"
+        data-status="{{item.status}}"
+        bindtap="goOrders"
+      >
+        <text class="entry-icon">{{item.icon}}</text>
+        <text class="entry-label">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 会员信息 -->
+  <view wx:if="{{isLogin}}" class="card member-info">
+    <view class="info-row"><text class="i-label">会员积分</text><text class="i-value">{{member.integration || 0}}</text></view>
+    <view class="info-row"><text class="i-label">手机号</text><text class="i-value">{{member.phone || '未绑定'}}</text></view>
+  </view>
+
+  <view wx:if="{{isLogin}}" class="card menu-card">
+    <view class="menu-row" bindtap="goAddress">
+      <text class="menu-icon">📍</text>
+      <text class="menu-label">收货地址</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <view wx:if="{{isLogin}}" class="card menu-card">
+    <view class="menu-row" bindtap="goFavorite">
+      <text class="menu-icon">❤️</text>
+      <text class="menu-label">我的收藏</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <view wx:if="{{isLogin}}" class="btn-ghost logout-btn" bindtap="onLogout">退出登录</view>
+
+  <view class="bottom-gap"></view>
+</view>

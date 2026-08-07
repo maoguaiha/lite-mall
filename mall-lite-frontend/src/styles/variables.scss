@@ -1,0 +1,74 @@
+// =============================================================
+// Design tokens — refreshed system (brand blue + refined slate)
+// 统一主色调：现代高质感品牌蓝 / 深灰，去掉高饱和彩虹色
+// =============================================================
+
+// ---- Brand & semantic palette ----
+$brand:        #2563eb; // 主品牌蓝 (blue-600)
+$brand-hover:  #1d4ed8; // blue-700
+$brand-active: #1e40af; // blue-800
+$brand-soft:   rgba(37, 99, 235, 0.08);   // 柔和底色（图标 / 选中态）
+$brand-soft-2: rgba(37, 99, 235, 0.14);
+
+// Element Plus 主色（全站统一为品牌蓝）
+$primary-color: $brand;
+
+$bg-color:     #f6f8fb; // 页面底色，更轻盈、留白更足
+$surface:      #ffffff; // 卡片 / 表面
+
+$danger-color: #e11d48; // 统一强调红（价格、警示），收敛高饱和橙
+$price-color:  #e11d48;
+$warning-color:#f59e0b;
+
+// 文本层级（深灰体系）
+$ink-1: #0f172a; // 标题 / 主文本
+$ink-2: #475569; // 次要文本
+$ink-3: #94a3b8; // 辅助 / 占位
+
+$text-color-primary:   $ink-1;
+$text-color-secondary: $ink-2;
+$text-color-tertiary:  $ink-3;
+$icon-color:           $ink-2;
+
+$line:        #e6eaf1; // 分割线 / 边框
+$border-color: $line;
+$overlay-color: rgba(15, 23, 42, 0.45);
+
+// ---- Radii ----
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 22px;
+$border-radius-base: $radius-md;
+
+// ---- Shadows ----
+$shadow-xs:  0 1px 2px rgba(15, 23, 42, 0.06);
+$shadow-sm:  0 2px 10px rgba(15, 23, 42, 0.08);
+$shadow-md:  0 10px 28px rgba(15, 23, 42, 0.10);
+$shadow-lg:  0 18px 44px rgba(15, 23, 42, 0.14);
+$shadow-header: 0 6px 24px rgba(15, 23, 42, 0.08); // 吸顶头部轻阴影
+
+// ---- Spacing ----
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 12px;
+$space-lg: 20px;
+$space-xl: 32px;
+$padding-base: 16px;
+
+// ---- Layout ----
+$header-height: 68px;
+$content-max: 1280px;
+
+// ---- Typography ----
+$font-size-title-lg: 22px;
+$font-size-title-md: 17px;
+$font-size-text:     14px;
+$icon-size:          22px;
+
+// ---- List item heights (Element Plus overrides) ----
+$list-item-height-sm: 36px;
+$list-item-height-md: 44px;
+
+// ---- Motion ----
+$ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);

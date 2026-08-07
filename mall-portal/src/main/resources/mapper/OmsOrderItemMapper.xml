@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.OmsOrderItemMapper">
+    
+    <insert id="insert" parameterType="com.macro.mall.model.OmsOrderItem">
+        INSERT INTO oms_order_item (order_id, order_sn, product_id, product_sku_id, product_name, product_image, product_price, quantity, total_price, create_time)
+        VALUES (#{orderId}, #{orderSn}, #{productId}, #{productSkuId}, #{productName}, #{productImage}, #{productPrice}, #{quantity}, #{totalPrice}, #{createTime})
+    </insert>
+    
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT INTO oms_order_item (order_id, order_sn, product_id, product_sku_id, product_name, product_image, product_price, quantity, total_price, create_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.orderId}, #{item.orderSn}, #{item.productId}, #{item.productSkuId}, #{item.productName}, #{item.productImage}, #{item.productPrice}, #{item.quantity}, #{item.totalPrice}, #{item.createTime})
+        </foreach>
+    </insert>
+    
+    <select id="selectByOrderId" resultType="com.macro.mall.model.OmsOrderItem">
+        SELECT * FROM oms_order_item WHERE order_id = #{orderId}
+    </select>
+    
+    <select id="selectByOrderSn" resultType="com.macro.mall.model.OmsOrderItem">
+        SELECT * FROM oms_order_item WHERE order_sn = #{orderSn}
+    </select>
+</mapper>

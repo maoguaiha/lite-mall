@@ -1,0 +1,102 @@
+/* 全局样式 */
+page {
+  background-color: #f4f4f4;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 28rpx;
+  color: #333;
+}
+
+view, text, image, scroll-view {
+  box-sizing: border-box;
+}
+
+/* 主题色 */
+.text-primary { color: #2ab795; }
+.text-price { color: #fb0017; }
+.bg-primary { background-color: #2ab795; }
+
+/* 通用按钮 */
+.btn-primary {
+  background-color: #2ab795;
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  height: 80rpx;
+  text-align: center;
+  border: none;
+}
+.btn-primary::after { border: none; }
+.btn-primary[disabled] { background-color: #b8e3da; color: #fff; }
+
+.btn-ghost {
+  background-color: #fff;
+  color: #2ab795;
+  border: 1rpx solid #2ab795;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  line-height: 60rpx;
+  height: 60rpx;
+  text-align: center;
+}
+.btn-ghost::after { border: none; }
+
+/* 价格符号 */
+.price-symbol { font-size: 22rpx; }
+
+/* 空状态 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+  color: #999;
+}
+.empty .empty-icon { font-size: 90rpx; margin-bottom: 20rpx; }
+.empty .empty-text { font-size: 28rpx; }
+
+/* 通用卡片 */
+.card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin: 20rpx;
+  padding: 24rpx;
+}
+
+/* 区块标题 */
+.section-title {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 20rpx 10rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.section-title .bar {
+  width: 8rpx;
+  height: 32rpx;
+  background-color: #2ab795;
+  border-radius: 4rpx;
+  margin-right: 14rpx;
+}
+
+/* 加载更多提示 */
+.load-more {
+  text-align: center;
+  color: #999;
+  font-size: 24rpx;
+  padding: 24rpx 0;
+}
+
+/* 图片占位（商品/购物车/订单无图时显示，纯本地渲染，无需网络或二进制资源） */
+.product-img-ph,
+.item-img-ph,
+.gallery-ph {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f1f3;
+  color: #c4c9d0;
+}

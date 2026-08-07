@@ -1,0 +1,62 @@
+.auth {
+  min-height: 100vh;
+  padding: 120rpx 60rpx;
+  background-color: #fff;
+}
+.logo {
+  font-size: 120rpx;
+  text-align: center;
+}
+.title {
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #2ab795;
+  margin-bottom: 80rpx;
+}
+.form-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+}
+.prefix { font-size: 36rpx; margin-right: 20rpx; }
+.input {
+  flex: 1;
+  font-size: 30rpx;
+}
+.submit {
+  margin-top: 60rpx;
+}
+.switch {
+  text-align: center;
+  font-size: 26rpx;
+  color: #2ab795;
+  margin-top: 40rpx;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-size: 24rpx;
+  margin: 60rpx 0 30rpx;
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1rpx;
+  background: #eee;
+  margin: 0 20rpx;
+}
+.btn-wechat {
+  background-color: #07c160;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 44rpx;
+  padding: 18rpx 0;
+  line-height: 1.6;
+}
+.btn-wechat::after { border: none; }

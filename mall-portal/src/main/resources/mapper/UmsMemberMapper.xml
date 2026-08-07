@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.UmsMemberMapper">
+    
+    <select id="selectByUsername" resultType="com.macro.mall.model.UmsMember">
+        SELECT * FROM ums_member WHERE username = #{username}
+    </select>
+    
+    <select id="selectByPhone" resultType="com.macro.mall.model.UmsMember">
+        SELECT * FROM ums_member WHERE phone = #{phone}
+    </select>
+    
+    <insert id="insert" parameterType="com.macro.mall.model.UmsMember">
+        INSERT INTO ums_member (member_level_id, username, password, nickname, phone, status, create_time, update_time)
+        VALUES (#{memberLevelId}, #{username}, #{password}, #{nickname}, #{phone}, #{status}, #{createTime}, #{updateTime})
+    </insert>
+    
+    <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.UmsMember">
+        UPDATE ums_member
+        <set>
+            <if test="memberLevelId != null">member_level_id = #{memberLevelId},</if>
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="job != null">job = #{job},</if>
+            <if test="personalizedSignature != null">personalized_signature = #{personalizedSignature},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <select id="selectByPrimaryKey" resultType="com.macro.mall.model.UmsMember">
+        SELECT * FROM ums_member WHERE id = #{id}
+    </select>
+</mapper>

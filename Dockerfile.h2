@@ -1,0 +1,21 @@
+# Standalone H2 TCP server so the two Spring Boot apps can share one database
+# across containers (H2 AUTO_SERVER only works on localhost, so a dedicated
+# TCP server is the clean way to share state in Docker).
+ARG REGISTRY=docker.1ms.run/library/
+FROM ${REGISTRY}maven:3.9-eclipse-temurin-17 AS build
+COPY maven-settings.xml /root/.m2/settings.xml
+RUN mkdir -p /h2 && mvn org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get \
+    -Dartifact=com.h2database:h2:2.2.224:jar && \
+    cp /root/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar /h2/h2.jar
+
+FROM ${REGISTRY}eclipse-temurin:17-jre
+COPY --from=build /h2/h2.jar /opt/h2/h2.jar
+EXPOSE 9092
+VOLUME /data
+# H2 TCP server performs no password auth itself (the -user/-password options are
+# unsupported by org.h2.tools.Server). DB-level auth happens on the client connect
+# URL. Apps connect as sa / 123456; if the DB file is missing, -ifNotExists creates
+# it and stores that password. Delete mall-shared.mv.db to reset credentials.
+CMD ["java", "-cp", "/opt/h2/h2.jar", "org.h2.tools.Server", \
+     "-tcp", "-tcpAllowOthers", "-tcpPort", "9092", \
+     "-baseDir", "/data", "-ifNotExists"]

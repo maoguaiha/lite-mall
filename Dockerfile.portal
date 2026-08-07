@@ -1,0 +1,13 @@
+# mall-portal (Spring Boot) - multi-stage build
+ARG REGISTRY=docker.1ms.run/library/
+FROM ${REGISTRY}maven:3.9-eclipse-temurin-17 AS build
+COPY maven-settings.xml /root/.m2/settings.xml
+WORKDIR /build
+COPY . .
+RUN mvn -q -pl mall-portal -am -DskipTests package
+
+FROM ${REGISTRY}eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /build/mall-portal/target/mall-portal-1.0-SNAPSHOT.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]

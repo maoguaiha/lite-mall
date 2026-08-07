@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/product/list",
+    "pages/product/detail",
+    "pages/cart/cart",
+    "pages/order/create",
+    "pages/order/list",
+    "pages/order/detail",
+    "pages/profile/profile",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/address/list",
+    "pages/address/edit",
+    "pages/favorite/list"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2ab795",
+    "navigationBarTitleText": "轻 Mall 商城",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f4f4f4"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2ab795",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

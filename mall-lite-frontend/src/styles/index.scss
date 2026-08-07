@@ -1,0 +1,93 @@
+@use 'sass:color';
+@use './variables' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: $font-size-text;
+  color: $text-color-primary;
+  background-color: $bg-color;
+  line-height: 1.5;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+}
+
+a:hover {
+  color: color.adjust($primary-color, $lightness: -10%);
+}
+
+.el-button--primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  
+  &:hover,
+  &:focus {
+    background-color: color.adjust($primary-color, $lightness: -10%);
+    border-color: color.adjust($primary-color, $lightness: -10%);
+  }
+}
+
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px $primary-color inset;
+}
+
+.el-breadcrumb__inner {
+  color: $text-color-secondary;
+}
+
+.el-breadcrumb__inner a:hover {
+  color: $primary-color;
+}
+
+.el-table th {
+  background-color: #fafafa;
+  color: $text-color-secondary;
+}
+
+.el-table td,
+.el-table th {
+  border-bottom-color: $border-color;
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background-color: #fafafa;
+}
+
+.el-card {
+  border-radius: $border-radius-base;
+  box-shadow: $shadow-sm;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: $primary-color;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

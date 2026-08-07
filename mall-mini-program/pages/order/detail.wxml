@@ -1,0 +1,61 @@
+<view class="detail" wx:if="{{order.orderSn}}">
+  <!-- 状态 -->
+  <view class="status-bar">订单状态：{{order.statusText}}</view>
+
+  <!-- 收货信息 -->
+  <view class="card receiver">
+    <view class="receiver-line1">
+      <text class="r-name">{{order.receiverName}}</text>
+      <text class="r-phone">{{order.receiverPhone}}</text>
+    </view>
+    <view class="r-addr">{{order.address}}</view>
+  </view>
+
+  <!-- 商品 -->
+  <view class="card">
+    <view class="order-item" wx:for="{{items}}" wx:key="id">
+      <view class="item-img">
+        <image wx:if="{{item.img}}" src="{{item.img}}" mode="aspectFill" />
+        <view wx:else class="item-img-ph">🛍</view>
+      </view>
+      <view class="item-info">
+        <view class="item-name">{{item.productName}}</view>
+        <view class="item-bottom">
+          <text class="text-price price"><text class="price-symbol">¥</text>{{item.price}}</text>
+          <text class="item-qty">x{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 金额 -->
+  <view class="card amount">
+    <view class="amount-row">
+      <text class="a-label">商品总额</text>
+      <text class="a-value">¥{{order.totalAmount}}</text>
+    </view>
+    <view class="amount-row">
+      <text class="a-label">运费</text>
+      <text class="a-value">¥{{order.freightAmount}}</text>
+    </view>
+    <view class="amount-row total-row">
+      <text class="a-label">实付款</text>
+      <text class="text-price a-total"><text class="price-symbol">¥</text>{{order.payAmount}}</text>
+    </view>
+  </view>
+
+  <!-- 订单信息 -->
+  <view class="card info">
+    <view class="info-row"><text class="i-label">订单编号</text><text class="i-value">{{order.orderSn}}</text></view>
+    <view class="info-row"><text class="i-label">下单时间</text><text class="i-value">{{order.createTime}}</text></view>
+  </view>
+
+  <!-- 操作 -->
+  <view class="detail-actions" wx:if="{{order.status === 0 || order.status === 2}}">
+    <view wx:if="{{order.status === 0}}" class="act act-cancel" bindtap="onCancel">取消订单</view>
+    <view wx:if="{{order.status === 0}}" class="act act-pay" bindtap="onPay">去支付</view>
+    <view wx:if="{{order.status === 2}}" class="act act-pay" bindtap="onConfirm">确认收货</view>
+  </view>
+
+  <view class="bottom-gap"></view>
+</view>

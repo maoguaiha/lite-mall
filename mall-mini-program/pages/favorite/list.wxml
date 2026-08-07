@@ -1,0 +1,18 @@
+<view class="fav-page">
+  <view wx:if="{{!loading && list.length === 0}}" class="empty">
+    <text class="empty-icon">❤️</text>
+    <text class="empty-text">还没有收藏的商品</text>
+  </view>
+
+  <view class="fav-item" wx:for="{{list}}" wx:key="favId" data-id="{{item.productId}}" bindtap="goProduct">
+    <image wx:if="{{item.img}}" src="{{item.img}}" mode="aspectFill" class="fav-img" />
+    <view wx:else class="fav-img fav-ph">🛍</view>
+    <view class="fav-info">
+      <view class="fav-name">{{item.name}}</view>
+      <view class="fav-price text-price">¥{{item.price}}</view>
+    </view>
+    <view class="fav-del" catchtap="onRemove" data-id="{{item.productId}}">取消收藏</view>
+  </view>
+
+  <view class="bottom-gap"></view>
+</view>

@@ -1,0 +1,10 @@
+# keep the Docker build context small & avoid copying build artifacts
+mall-lite-frontend/node_modules
+mall-lite-frontend/dist
+**/target
+logs
+.pids
+mall-shared
+.git
+**/.git
+*.log

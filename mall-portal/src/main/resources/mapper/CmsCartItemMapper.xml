@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.CmsCartItemMapper">
+    
+    <select id="selectByMemberId" resultType="com.macro.mall.model.CmsCartItem">
+        SELECT * FROM cms_cart_item WHERE member_id = #{memberId} AND delete_status = 0 ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectByMemberIdAndProductId" resultType="com.macro.mall.model.CmsCartItem">
+        SELECT * FROM cms_cart_item WHERE member_id = #{memberId} AND product_id = #{productId} AND delete_status = 0
+        <if test="productSkuId != null">AND product_sku_id = #{productSkuId}</if>
+        <if test="productSkuId == null">AND (product_sku_id IS NULL OR product_sku_id = 0)</if>
+    </select>
+    
+    <insert id="insert" parameterType="com.macro.mall.model.CmsCartItem">
+        INSERT INTO cms_cart_item (member_id, product_id, product_sku_id, product_name, product_image, product_price, quantity, sku_attributes, create_time, update_time)
+        VALUES (#{memberId}, #{productId}, #{productSkuId}, #{productName}, #{productImage}, #{productPrice}, #{quantity}, #{skuAttributes}, #{createTime}, #{updateTime})
+    </insert>
+    
+    <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.CmsCartItem">
+        UPDATE cms_cart_item
+        <set>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <update id="logicalDeleteByPrimaryKey">
+        UPDATE cms_cart_item SET delete_status = 1, update_time = NOW() WHERE id = #{id}
+    </update>
+
+    <update id="logicalDeleteByMemberId">
+        UPDATE cms_cart_item SET delete_status = 1, update_time = NOW() WHERE member_id = #{memberId}
+    </update>
+
+    <update id="logicalDeleteByMemberIdAndIds">
+        UPDATE cms_cart_item SET delete_status = 1, update_time = NOW() WHERE member_id = #{memberId} AND id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+</mapper>

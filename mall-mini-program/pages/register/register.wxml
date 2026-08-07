@@ -1,0 +1,25 @@
+<view class="auth">
+  <view class="logo">🛍</view>
+  <view class="title">注册账号</view>
+
+  <view class="form">
+    <view class="form-item">
+      <text class="prefix">👤</text>
+      <input class="input" placeholder="用户名" value="{{username}}" data-field="username" bindinput="onInput" />
+    </view>
+    <view class="form-item">
+      <text class="prefix">🔒</text>
+      <input class="input" placeholder="密码" password value="{{password}}" data-field="password" bindinput="onInput" />
+    </view>
+    <view class="form-item">
+      <text class="prefix">📱</text>
+      <input class="input" placeholder="手机号" type="number" value="{{phone}}" data-field="phone" bindinput="onInput" />
+    </view>
+    <view class="form-item">
+      <text class="prefix">✏️</text>
+      <input class="input" placeholder="昵称（选填）" value="{{nickname}}" data-field="nickname" bindinput="onInput" />
+    </view>
+    <view class="btn-primary submit" bindtap="onRegister">注 册</view>
+    <view class="switch" bindtap="goLogin">已有账号？返回登录</view>
+  </view>
+</view>

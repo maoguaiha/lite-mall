@@ -1,0 +1,20 @@
+<view class="auth">
+  <view class="logo">🛍</view>
+  <view class="title">轻 Mall 商城</view>
+
+  <view class="form">
+    <view class="form-item">
+      <text class="prefix">👤</text>
+      <input class="input" placeholder="用户名" value="{{username}}" data-field="username" bindinput="onInput" />
+    </view>
+    <view class="form-item">
+      <text class="prefix">🔒</text>
+      <input class="input" placeholder="密码" password value="{{password}}" data-field="password" bindinput="onInput" />
+    </view>
+    <view class="btn-primary submit" bindtap="onLogin">登 录</view>
+    <view class="switch" bindtap="goRegister">还没有账号？立即注册</view>
+
+    <view class="divider"><text>其他方式</text></view>
+    <button class="btn-wechat" bindtap="onWechatLogin">微信一键登录</button>
+  </view>
+</view>

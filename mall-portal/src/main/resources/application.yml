@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    allow-circular-references: true
+  datasource:
+    # 与 mall-admin 共享同一物理库（../mall-shared 在两个模块目录下都解析到 mall-lite/mall-shared），
+    # 用户端可直接读到商家端创建的秒杀活动（秒杀数据隔离修复）。AUTO_SERVER 允许多进程并发访问。
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:file:../mall-shared;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;MODE=MySQL}
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 123456
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema-h2.sql,classpath*:schema-modules.sql
+      data-locations: classpath:data-h2.sql,classpath*:data-modules.sql
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/**/*.xml
+
+pagehelper:
+  helper-dialect: h2
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+jwt:
+  secret: mall-lite-secret-key-2024-macro-mall
+  expire: 86400000
+
+wechat:
+  # 微信小程序登录所需配置，请替换为你的小程序 AppID / AppSecret
+  # （在「微信公众平台 -> 开发 -> 开发管理 -> 开发设置」获取）
+  appid: your-mini-program-appid
+  secret: your-mini-program-secret

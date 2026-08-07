@@ -1,0 +1,57 @@
+<view class="create">
+  <!-- 收货地址 -->
+  <view class="card address">
+    <view class="addr-head" bindtap="goSelectAddress">
+      <text class="addr-title">收货地址</text>
+      <text class="addr-select">选择地址 ›</text>
+    </view>
+    <view class="form-item">
+      <text class="label">收货人</text>
+      <input class="field" placeholder="请输入收货人姓名" value="{{receiverName}}" data-field="receiverName" bindinput="onInput" />
+    </view>
+    <view class="form-item">
+      <text class="label">手机号</text>
+      <input class="field" placeholder="请输入手机号" value="{{receiverPhone}}" data-field="receiverPhone" bindinput="onInput" type="number" />
+    </view>
+    <view class="form-item">
+      <text class="label">地区</text>
+      <picker mode="region" value="{{region}}" bindchange="onRegionChange">
+        <view class="field picker {{region[0] ? '' : 'placeholder'}}">{{regionText}}</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">详细</text>
+      <input class="field" placeholder="街道、楼牌号等" value="{{receiverDetailAddress}}" data-field="receiverDetailAddress" bindinput="onInput" />
+    </view>
+  </view>
+
+  <!-- 商品清单 -->
+  <view class="card">
+    <view class="addr-title">商品清单</view>
+    <view class="order-item" wx:for="{{items}}" wx:key="id">
+      <view class="item-img">
+        <image wx:if="{{item.img}}" src="{{item.img}}" mode="aspectFill" />
+        <view wx:else class="item-img-ph">🛍</view>
+      </view>
+      <view class="item-info">
+        <view class="item-name">{{item.productName}}</view>
+        <view class="item-sku" wx:if="{{item.skuAttributes}}">{{item.skuAttributes}}</view>
+        <view class="item-bottom">
+          <text class="text-price price"><text class="price-symbol">¥</text>{{item.price}}</text>
+          <text class="item-qty">x{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-gap"></view>
+</view>
+
+<!-- 提交栏 -->
+<view class="submit-bar">
+  <view class="submit-total">
+    <text>合计：</text>
+    <text class="text-price total"><text class="price-symbol">¥</text>{{total}}</text>
+  </view>
+  <view class="submit-btn {{submitting ? 'disabled' : ''}}" bindtap="onSubmit">提交订单</view>
+</view>

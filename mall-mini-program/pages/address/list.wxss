@@ -1,0 +1,72 @@
+.addr-page {
+  padding: 20rpx;
+}
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+  color: #999;
+}
+.empty-icon { font-size: 80rpx; margin-bottom: 20rpx; }
+.empty-text { font-size: 28rpx; }
+
+.addr-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+}
+.addr-card.selectable { border: 2rpx solid #2ab795; }
+
+.addr-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.addr-name { font-size: 30rpx; font-weight: 600; color: #333; }
+.addr-phone { font-size: 28rpx; color: #666; margin-left: 20rpx; }
+.tag-default {
+  font-size: 22rpx;
+  color: #2ab795;
+  border: 1rpx solid #2ab795;
+  border-radius: 6rpx;
+  padding: 2rpx 10rpx;
+  margin-left: 16rpx;
+}
+.addr-detail {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+}
+.addr-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+  padding-top: 16rpx;
+}
+.act {
+  font-size: 26rpx;
+  color: #666;
+  margin-left: 36rpx;
+}
+.act.danger { color: #e54d42; }
+
+.add-bar {
+  position: fixed;
+  left: 24rpx;
+  right: 24rpx;
+  bottom: 30rpx;
+  height: 88rpx;
+  background: #2ab795;
+  color: #fff;
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+.add-icon { margin-right: 10rpx; font-size: 36rpx; }
+.bottom-gap { height: 140rpx; }

@@ -1,0 +1,92 @@
+.order-list {
+  min-height: 100vh;
+  padding-bottom: 30rpx;
+}
+
+.login-btn { margin-top: 30rpx; width: 240rpx; }
+
+/* tabs */
+.tabs {
+  display: flex;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+.tab.active {
+  color: #2ab795;
+  font-weight: 600;
+}
+.tab.active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 48rpx;
+  height: 6rpx;
+  background-color: #2ab795;
+  border-radius: 3rpx;
+}
+
+/* 订单卡片 */
+.order-card {
+  background-color: #fff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+.order-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22rpx 24rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+}
+.order-sn { font-size: 26rpx; color: #666; }
+.order-status { font-size: 26rpx; color: #2ab795; }
+.order-addr {
+  padding: 22rpx 24rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+}
+.addr-name { font-size: 28rpx; font-weight: 600; margin-right: 16rpx; }
+.addr-phone { font-size: 26rpx; color: #666; }
+.addr-detail {
+  display: block;
+  font-size: 24rpx;
+  color: #888;
+  margin-top: 8rpx;
+}
+.order-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 24rpx;
+}
+.order-total { font-size: 26rpx; color: #666; }
+.order-total .text-price { font-size: 32rpx; font-weight: 700; }
+.order-actions { display: flex; }
+.act {
+  font-size: 24rpx;
+  padding: 8rpx 22rpx;
+  border-radius: 30rpx;
+  margin-left: 16rpx;
+}
+.act-cancel {
+  color: #888;
+  border: 1rpx solid #ccc;
+}
+.act-pay {
+  color: #2ab795;
+  border: 1rpx solid #2ab795;
+}

@@ -1,0 +1,56 @@
+<view class="cart">
+  <!-- 未登录 -->
+  <view wx:if="{{!isLogin}}" class="empty">
+    <text class="empty-icon">👤</text>
+    <text class="empty-text">登录后查看购物车</text>
+    <view class="btn-primary login-btn" bindtap="goLogin">去登录</view>
+  </view>
+
+  <!-- 空购物车 -->
+  <view wx:elif="{{items.length === 0}}" class="empty">
+    <text class="empty-icon">🛒</text>
+    <text class="empty-text">购物车还是空的</text>
+    <view class="btn-primary login-btn" bindtap="goShopping">去逛逛</view>
+  </view>
+
+  <!-- 购物车列表 -->
+  <block wx:else>
+    <view class="cart-item" wx:for="{{items}}" wx:key="id">
+      <view class="check {{item.checked ? 'checked' : ''}}" data-id="{{item.id}}" bindtap="onCheckItem">
+        <text wx:if="{{item.checked}}">✓</text>
+      </view>
+      <view class="item-img">
+        <image wx:if="{{item.img}}" src="{{item.img}}" mode="aspectFill" />
+        <view wx:else class="item-img-ph">🛍</view>
+      </view>
+      <view class="item-info">
+        <view class="item-name">{{item.productName}}</view>
+        <view class="item-sku" wx:if="{{item.skuAttributes}}">{{item.skuAttributes}}</view>
+        <view class="item-bottom">
+          <text class="text-price price"><text class="price-symbol">¥</text>{{item.price}}</text>
+          <view class="stepper">
+            <view class="step-btn" data-id="{{item.id}}" bindtap="onMinus">-</view>
+            <input class="step-input" type="number" value="{{item.quantity}}" data-id="{{item.id}}" bindinput="onQuantityInput" />
+            <view class="step-btn" data-id="{{item.id}}" bindtap="onPlus">+</view>
+          </view>
+        </view>
+      </view>
+      <view class="item-del" data-id="{{item.id}}" bindtap="onDelete">🗑</view>
+    </view>
+
+    <view class="bottom-gap"></view>
+  </block>
+</view>
+
+<!-- 结算栏 -->
+<view wx:if="{{isLogin && items.length > 0}}" class="checkout-bar">
+  <view class="check all {{allChecked ? 'checked' : ''}}" bindtap="onCheckAll">
+    <text wx:if="{{allChecked}}">✓</text>
+  </view>
+  <text class="all-label" bindtap="onCheckAll">全选</text>
+  <view class="total-box">
+    <text>合计：</text>
+    <text class="text-price total"><text class="price-symbol">¥</text>{{total}}</text>
+  </view>
+  <view class="checkout-btn" bindtap="onCheckout">结算({{selectedCount}})</view>
+</view>

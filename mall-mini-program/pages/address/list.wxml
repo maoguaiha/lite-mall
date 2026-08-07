@@ -1,0 +1,34 @@
+<view class="addr-page">
+  <view wx:if="{{addresses.length === 0}}" class="empty">
+    <text class="empty-icon">📍</text>
+    <text class="empty-text">还没有收货地址，去新增一个吧</text>
+  </view>
+
+  <view
+    class="addr-card {{selectMode ? 'selectable' : ''}}"
+    wx:for="{{addresses}}"
+    wx:key="id"
+    data-id="{{item.id}}"
+    bindtap="{{selectMode ? 'onSelect' : ''}}"
+  >
+    <view class="addr-top">
+      <text class="addr-name">{{item.name}}</text>
+      <text class="addr-phone">{{item.phone}}</text>
+      <text wx:if="{{item.isDefault}}" class="tag-default">默认</text>
+    </view>
+    <view class="addr-detail">{{item.fullAddress}}</view>
+
+    <view wx:if="{{!selectMode}}" class="addr-actions">
+      <text class="act" wx:if="{{!item.isDefault}}" data-id="{{item.id}}" bindtap="onSetDefault">设为默认</text>
+      <text class="act" data-id="{{item.id}}" bindtap="goEdit">编辑</text>
+      <text class="act danger" data-id="{{item.id}}" bindtap="onDelete">删除</text>
+    </view>
+  </view>
+
+  <view class="bottom-gap"></view>
+</view>
+
+<view class="add-bar" bindtap="goAdd">
+  <text class="add-icon">＋</text>
+  <text>新增收货地址</text>
+</view>

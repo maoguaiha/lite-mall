@@ -1,0 +1,46 @@
+# Maven 构建产物
+**/target/
+**/*.class
+**/*.jar
+**/*.war
+**/*.lst
+
+# Node / 前端依赖与构建
+mall-lite-frontend/node_modules/
+mall-lite-frontend/dist/
+node_modules/
+
+# 微信小程序开发者工具缓存
+mall-mini-program/project.private.config.json
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# 日志
+*.log
+logs/
+
+# H2 数据库文件
+*.mv.db
+*.lock.db
+*.trace.db
+
+# 临时 / 提取产物
+portal-app-extracted/
+portal-app.jar
+portal-app.zip
+catall_tmp.json
+your
+
+# 操作系统
+Thumbs.db
+.DS_Store
+
+# 工具 / IDE 内部数据
+.workbuddy/
+.codebuddy/

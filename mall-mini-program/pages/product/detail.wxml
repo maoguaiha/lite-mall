@@ -1,0 +1,74 @@
+<view class="detail">
+  <!-- 商品图 -->
+  <swiper class="gallery" indicator-dots autoplay circular indicator-active-color="#fff">
+    <swiper-item wx:for="{{images}}" wx:key="*this">
+      <image wx:if="{{item}}" src="{{item}}" mode="aspectFill" class="gallery-img" />
+      <view wx:else class="gallery-ph">🛍</view>
+    </swiper-item>
+  </swiper>
+
+  <!-- 价格 / 标题 -->
+  <view class="head card">
+    <view class="price-row">
+      <text class="text-price price-lg"><text class="price-symbol">¥</text>{{price}}</text>
+      <text class="stock">库存 {{stock}}</text>
+    </view>
+    <view class="title">{{product.name}}</view>
+    <view class="subtitle" wx:if="{{product.subtitle}}">{{product.subtitle}}</view>
+    <view class="meta">销量 {{product.sales}}</view>
+  </view>
+
+  <!-- 规格选择 -->
+  <view class="card" wx:if="{{specKeys.length > 0}}">
+    <view class="spec-block" wx:for="{{specKeys}}" wx:key="key" wx:for-item="spec">
+      <view class="spec-key">{{spec.key}}</view>
+      <view class="spec-values">
+        <view
+          class="spec-value {{spec.selectedValue === val ? 'active' : ''}}"
+          wx:for="{{spec.values}}"
+          wx:for-item="val"
+          wx:key="*this"
+          data-key="{{spec.key}}"
+          data-value="{{val}}"
+          bindtap="onSelectSpec"
+        >{{val}}</view>
+      </view>
+    </view>
+
+    <view class="spec-block">
+      <view class="spec-key">数量</view>
+      <view class="stepper">
+        <view class="step-btn" bindtap="onMinus">-</view>
+        <input class="step-input" type="number" value="{{quantity}}" bindinput="onQuantityInput" />
+        <view class="step-btn" bindtap="onPlus">+</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 详情 -->
+  <view class="section-title"><view class="bar"></view>商品详情</view>
+  <view class="detail-content card">
+    <rich-text wx:if="{{detail}}" nodes="{{detail}}"></rich-text>
+    <view wx:else class="empty">
+      <text class="empty-text">暂无详情</text>
+    </view>
+  </view>
+
+  <view class="bottom-gap"></view>
+</view>
+
+<!-- 底部操作栏 -->
+<view class="action-bar">
+  <view class="bar-icon" bindtap="goCart">
+    <text class="bar-emoji">🛒</text>
+    <text class="bar-label">购物车</text>
+  </view>
+  <view class="bar-icon" bindtap="toggleFavorite">
+    <text class="bar-emoji {{isFav ? 'fav' : ''}}">{{isFav ? '♥' : '♡'}}</text>
+    <text class="bar-label">收藏</text>
+  </view>
+  <view class="bar-btns">
+    <view class="bar-btn cart-btn" bindtap="addToCart">加入购物车</view>
+    <view class="bar-btn buy-btn" bindtap="buyNow">立即购买</view>
+  </view>
+</view>

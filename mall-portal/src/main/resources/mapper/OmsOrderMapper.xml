@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.OmsOrderMapper">
+    
+    <insert id="insert" parameterType="com.macro.mall.model.OmsOrder" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO oms_order (order_sn, member_id, member_username, total_amount, pay_amount, pay_status, pay_type, status, receiver_name, receiver_phone, receiver_province, receiver_city, receiver_district, receiver_detail_address, create_time)
+        VALUES (#{orderSn}, #{memberId}, #{memberUsername}, #{totalAmount}, #{payAmount}, #{payStatus}, #{payType}, #{status}, #{receiverName}, #{receiverPhone}, #{receiverProvince}, #{receiverCity}, #{receiverDistrict}, #{receiverDetailAddress}, #{createTime})
+    </insert>
+    
+    <select id="selectByPrimaryKey" resultType="com.macro.mall.model.OmsOrder">
+        SELECT * FROM oms_order WHERE id = #{id}
+    </select>
+    
+    <select id="selectByOrderSn" resultType="com.macro.mall.model.OmsOrder">
+        SELECT * FROM oms_order WHERE order_sn = #{orderSn}
+    </select>
+    
+    <select id="selectByMemberId" resultType="com.macro.mall.model.OmsOrder">
+        SELECT * FROM oms_order WHERE member_id = #{memberId} ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectByMemberIdAndStatus" resultType="com.macro.mall.model.OmsOrder">
+        SELECT * FROM oms_order WHERE member_id = #{memberId} AND status = #{status} ORDER BY create_time DESC
+    </select>
+    
+    <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.OmsOrder">
+        UPDATE oms_order
+        <set>
+            <if test="payStatus != null">pay_status = #{payStatus},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="payTime != null">pay_time = #{payTime},</if>
+            <if test="deliveryTime != null">delivery_time = #{deliveryTime},</if>
+            <if test="receiveTime != null">receive_time = #{receiveTime},</if>
+            <if test="cancelTime != null">cancel_time = #{cancelTime},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <update id="updatePayStatus">
+        UPDATE oms_order SET pay_status = #{payStatus} WHERE id = #{id}
+    </update>
+    
+    <update id="updateStatus">
+        UPDATE oms_order SET status = #{status} WHERE id = #{id}
+    </update>
+</mapper>

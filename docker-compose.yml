@@ -1,0 +1,108 @@
+# mall-lite full stack (run: docker compose up -d --build)
+#
+# Containers:
+#   h2       - standalone H2 TCP server; both backends share one DB via jdbc:h2:tcp://h2:9092/...
+#   redis    - required by portal (seckill Lua / caching)
+#   admin    - mall-admin  (host 18081 -> container 8081)
+#   portal   - mall-portal (host 18080 -> container 8080)
+#   frontend - Vue3 build served by nginx (host 18088 -> container 80), proxies /admin-api -> admin, /api -> portal
+#
+# The two backends connect to h2/redis by service name. No SQL was changed:
+# schema/data scripts (classpath:schema-h2.sql, schema-modules.sql, ...) run on
+# the shared H2 TCP server exactly as in local mode.
+
+services:
+  h2:
+    build:
+      context: .
+      dockerfile: Dockerfile.h2
+      args:
+        REGISTRY: "${REGISTRY}"
+    container_name: mall-lite-h2
+    volumes:
+      - h2-data:/data
+    ports:
+      - "9092:9092"
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/9092"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    image: ${REGISTRY}redis:7-alpine
+    container_name: mall-lite-redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  admin:
+    build:
+      context: .
+      dockerfile: Dockerfile.admin
+      args:
+        REGISTRY: "${REGISTRY}"
+    container_name: mall-lite-admin
+    depends_on:
+      h2:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:h2:tcp://h2:9092/./mall-shared;MODE=MySQL"
+      SPRING_DATASOURCE_USERNAME: "sa"
+      SPRING_DATASOURCE_PASSWORD: "123456"
+      SPRING_DATA_REDIS_HOST: "redis"
+    ports:
+      - "18081:8081"
+    restart: unless-stopped
+
+  portal:
+    build:
+      context: .
+      dockerfile: Dockerfile.portal
+      args:
+        REGISTRY: "${REGISTRY}"
+    container_name: mall-lite-portal
+    depends_on:
+      h2:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:h2:tcp://h2:9092/./mall-shared;MODE=MySQL"
+      SPRING_DATASOURCE_USERNAME: "sa"
+      SPRING_DATASOURCE_PASSWORD: "123456"
+      SPRING_DATA_REDIS_HOST: "redis"
+    ports:
+      - "18080:8080"
+      # 额外暴露 8080，供微信小程序端 (mall-mini-program) 直接调用 localhost:8080/api
+      - "8080:8080"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        REGISTRY: "${REGISTRY}"
+    container_name: mall-lite-frontend
+    depends_on:
+      - admin
+      - portal
+    ports:
+      - "18088:80"
+    restart: unless-stopped
+
+volumes:
+  h2-data:
+  redis-data:

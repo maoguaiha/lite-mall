@@ -1,0 +1,45 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: mall-admin
+  datasource:
+    # 与 mall-portal 共享同一物理库（../mall-shared 在两个模块目录下都解析到 mall-lite/mall-shared），
+    # 使商家端创建的秒杀活动对用户端可见（秒杀数据隔离修复）。AUTO_SERVER 允许多进程并发访问。
+    url: jdbc:h2:file:../mall-shared;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;MODE=MySQL
+    username: root
+    password: root
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema-h2.sql,classpath*:schema-modules.sql
+      data-locations: classpath:data-h2.sql,classpath*:data-modules.sql
+  h2:
+    console:
+      enabled: true
+  jackson:
+    default-property-inclusion: non_null
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      logic-delete-field: deleteFlag
+      logic-not-delete-value: 0
+      logic-delete-value: 2
+
+pagehelper:
+  helper-dialect: h2
+  reasonable: true
+
+jwt:
+  secret: "mall-admin-secret-key-2024-must-be-long-enough-for-hmac-sha256-sign"
+  expire: 3600000
+
+springdoc:
+  api-docs:
+    enabled: true

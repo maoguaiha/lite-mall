@@ -1,0 +1,102 @@
+.profile { min-height: 100vh; padding-bottom: 30rpx; }
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 50rpx 40rpx;
+  background-color: #2ab795;
+  color: #fff;
+}
+.avatar {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #2ab795;
+  font-size: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.header-info { flex: 1; margin-left: 24rpx; min-width: 0; }
+.nickname { font-size: 36rpx; font-weight: 600; }
+.tip { font-size: 24rpx; opacity: 0.9; margin-top: 8rpx; }
+
+.auth-btns { display: flex; align-items: center; }
+.login-btn {
+  width: 120rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  background-color: #fff;
+  color: #2ab795;
+  border-radius: 30rpx;
+  padding: 0;
+}
+.reg-btn {
+  margin-left: 16rpx;
+  width: 120rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  color: #fff;
+  border: 1rpx solid #fff;
+  border-radius: 30rpx;
+  padding: 0;
+}
+
+/* 订单入口 */
+.order-entry { margin-top: -30rpx; position: relative; z-index: 2; }
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.entry-title { font-size: 30rpx; font-weight: 600; }
+.entry-more { font-size: 24rpx; color: #999; }
+.entry-grid {
+  display: flex;
+  padding-top: 30rpx;
+}
+.entry-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.entry-icon { font-size: 52rpx; }
+.entry-label { font-size: 24rpx; color: #555; margin-top: 12rpx; }
+
+/* 会员信息 */
+.member-info { margin-top: 20rpx; }
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  padding: 16rpx 0;
+  color: #666;
+}
+.i-value { color: #333; }
+
+.logout-btn {
+  margin: 30rpx 20rpx 0;
+  text-align: center;
+  padding: 20rpx 0;
+  color: #fb0017;
+  border-color: #fb0017;
+}
+.bottom-gap { height: 30rpx; }
+
+/* 菜单入口 */
+.menu-card { margin: 20rpx; }
+.menu-row {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 24rpx;
+}
+.menu-icon { font-size: 36rpx; margin-right: 20rpx; }
+.menu-label { flex: 1; font-size: 28rpx; color: #333; }
+.menu-arrow { font-size: 32rpx; color: #bbb; }

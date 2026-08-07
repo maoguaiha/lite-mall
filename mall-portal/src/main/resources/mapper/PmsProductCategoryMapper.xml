@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.PmsProductCategoryMapper">
+    
+    <select id="selectByParentId" resultType="com.macro.mall.model.PmsProductCategory">
+        SELECT * FROM pms_product_category WHERE parent_id = #{parentId} ORDER BY sort ASC
+    </select>
+    
+    <select id="selectAll" resultType="com.macro.mall.model.PmsProductCategory">
+        SELECT * FROM pms_product_category ORDER BY level ASC, sort ASC
+    </select>
+    
+    <select id="selectByPrimaryKey" resultType="com.macro.mall.model.PmsProductCategory">
+        SELECT * FROM pms_product_category WHERE id = #{id}
+    </select>
+</mapper>

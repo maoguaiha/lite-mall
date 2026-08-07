@@ -1,0 +1,57 @@
+.fav-page { padding: 20rpx; }
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+  color: #999;
+}
+.empty-icon { font-size: 80rpx; margin-bottom: 20rpx; }
+.empty-text { font-size: 28rpx; }
+
+.fav-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+.fav-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  background: #f0f1f3;
+  flex-shrink: 0;
+}
+.fav-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60rpx;
+  color: #c4c9d0;
+}
+.fav-info {
+  flex: 1;
+  margin-left: 20rpx;
+  overflow: hidden;
+}
+.fav-name {
+  font-size: 28rpx;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.fav-price { font-size: 30rpx; color: #e54d42; margin-top: 16rpx; }
+.fav-del {
+  font-size: 24rpx;
+  color: #999;
+  padding: 12rpx 20rpx;
+  border: 1rpx solid #eee;
+  border-radius: 30rpx;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+.bottom-gap { height: 30rpx; }

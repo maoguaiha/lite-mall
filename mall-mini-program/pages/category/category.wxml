@@ -1,0 +1,38 @@
+<view class="category">
+  <!-- 左侧一级分类 -->
+  <scroll-view class="side" scroll-y>
+    <view
+      class="side-item {{activeId === item.id ? 'active' : ''}}"
+      wx:for="{{parents}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onTapParent"
+    >
+      {{item.name}}
+    </view>
+  </scroll-view>
+
+  <!-- 右侧二级分类 -->
+  <scroll-view class="content" scroll-y>
+    <view class="sub-grid">
+      <view
+        class="sub-item"
+        wx:for="{{children}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+        bindtap="goList"
+      >
+        <view class="sub-icon" wx:if="{{item.img}}">
+          <image src="{{item.img}}" mode="aspectFill" />
+        </view>
+        <view class="sub-icon sub-icon-text" wx:else>{{item.name[0]}}</view>
+        <text class="sub-name">{{item.name}}</text>
+      </view>
+    </view>
+    <view wx:if="{{children.length === 0}}" class="empty">
+      <text class="empty-icon">📂</text>
+      <text class="empty-text">暂无子分类</text>
+    </view>
+  </scroll-view>
+</view>

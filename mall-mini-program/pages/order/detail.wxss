@@ -1,0 +1,94 @@
+.detail { padding: 20rpx 0; min-height: 100vh; }
+
+.status-bar {
+  background-color: #2ab795;
+  color: #fff;
+  font-size: 30rpx;
+  padding: 30rpx 24rpx;
+}
+
+.card { margin: 20rpx; }
+
+.receiver-line1 { margin-bottom: 10rpx; }
+.r-name { font-size: 30rpx; font-weight: 600; margin-right: 20rpx; }
+.r-phone { font-size: 28rpx; color: #555; }
+.r-addr { font-size: 26rpx; color: #666; line-height: 38rpx; }
+
+.order-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.order-item:last-child { border-bottom: none; }
+.item-img {
+  width: 140rpx;
+  height: 140rpx;
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  margin-right: 20rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item-img image { width: 100%; height: 100%; }
+.item-img-ph { font-size: 56rpx; color: #ccc; }
+.item-info { flex: 1; min-width: 0; }
+.item-name {
+  font-size: 28rpx;
+  line-height: 36rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12rpx;
+}
+.price { font-size: 30rpx; font-weight: 700; }
+.item-qty { font-size: 26rpx; color: #999; }
+
+.amount-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  padding: 12rpx 0;
+  color: #555;
+}
+.total-row {
+  border-top: 1rpx solid #f0f0f0;
+  margin-top: 8rpx;
+  padding-top: 20rpx;
+}
+.a-total { font-size: 34rpx; font-weight: 700; }
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  padding: 10rpx 0;
+  color: #666;
+}
+.i-value { color: #333; }
+
+.detail-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20rpx 30rpx;
+}
+.act {
+  font-size: 26rpx;
+  padding: 12rpx 32rpx;
+  border-radius: 34rpx;
+  margin-left: 20rpx;
+}
+.act-cancel { color: #888; border: 1rpx solid #ccc; }
+.act-pay { color: #2ab795; border: 1rpx solid #2ab795; }
+
+.bottom-gap { height: 30rpx; }

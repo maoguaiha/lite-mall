@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.PmsProductMapper">
+    
+    <select id="selectByPrimaryKey" resultType="com.macro.mall.model.PmsProduct">
+        SELECT * FROM pms_product WHERE id = #{id}
+    </select>
+    
+    <select id="selectByCategoryId" resultType="com.macro.mall.model.PmsProduct">
+        SELECT * FROM pms_product WHERE category_id = #{categoryId} AND publish_status = 1 ORDER BY sort ASC, create_time DESC
+    </select>
+    
+    <select id="selectByKeyword" resultType="com.macro.mall.model.PmsProduct">
+        SELECT * FROM pms_product WHERE (name LIKE CONCAT('%', #{keyword}, '%') OR keywords LIKE CONCAT('%', #{keyword}, '%')) AND publish_status = 1 ORDER BY sort ASC, create_time DESC
+    </select>
+    
+    <select id="selectByCategoryIdAndKeyword" resultType="com.macro.mall.model.PmsProduct">
+        SELECT * FROM pms_product WHERE category_id = #{categoryId} AND (name LIKE CONCAT('%', #{keyword}, '%') OR keywords LIKE CONCAT('%', #{keyword}, '%')) AND publish_status = 1 ORDER BY sort ASC, create_time DESC
+    </select>
+
+    <select id="selectByCategoryIds" resultType="com.macro.mall.model.PmsProduct">
+        SELECT * FROM pms_product
+        WHERE category_id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">#{id}</foreach>
+        AND publish_status = 1
+        ORDER BY sort ASC, create_time DESC
+    </select>
+
+    <select id="selectByCategoryIdsAndKeyword" resultType="com.macro.mall.model.PmsProduct">
+        SELECT * FROM pms_product
+        WHERE category_id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">#{id}</foreach>
+        AND (name LIKE CONCAT('%', #{keyword}, '%') OR keywords LIKE CONCAT('%', #{keyword}, '%'))
+        AND publish_status = 1
+        ORDER BY sort ASC, create_time DESC
+    </select>
+
+    <select id="selectRecommendProducts" resultType="com.macro.mall.model.PmsProduct">
+        SELECT * FROM pms_product WHERE recommend_status = 1 AND publish_status = 1 ORDER BY sort ASC
+    </select>
+    
+    <select id="selectNewProducts" resultType="com.macro.mall.model.PmsProduct">
+        SELECT * FROM pms_product WHERE new_status = 1 AND publish_status = 1 ORDER BY create_time DESC
+    </select>
+    
+    <update id="updateStock">
+        UPDATE pms_product SET stock = #{stock}, update_time = NOW() WHERE id = #{id}
+    </update>
+
+    <update id="decrementStock">
+        UPDATE pms_product SET stock = stock - #{quantity}, update_time = NOW() WHERE id = #{id} AND stock >= #{quantity}
+    </update>
+</mapper>

@@ -93,10 +93,10 @@ mall-lite 提供了一套一键启动脚本：双击即可拉起全家桶（后�
 | Portal API | http://localhost:18080（`/api`） | http://localhost:8080（`/api`） |
 | Admin API | http://localhost:18081（`/admin-api`） | http://localhost:18081（`/admin-api`） |
 | H2 控制台 | http://localhost:9092 | — |
-| Redis | localhost:6379 | localhost:6379 |
-| 微信小程序后台 | 同 Portal API：http://localhost:8080/api | 同左 |
+| Redis | localhost:16379（宿主机 6379 已被其它 Redis 占用，已改映射） | localhost:6379 |
+| 微信小程序后台 | 同 Web 前台网关：http://localhost:18088/api | 同左 |
 
-> 微信小程序端（`mall-mini-program/`）通过 `utils/config.js` 的 `BASE_URL` 连接后端，本地默认 `http://localhost:8080/api`。脚本会自动尝试打开微信开发者工具并导入项目（appid `wxb23c20ad538a6cea`）；若未安装开发者工具或路径未匹配，会跳过此步，**不影响**后端 / Web 启动。
+> 微信小程序端（`mall-mini-program/`）通过 `utils/config.js` 的 `BASE_URL` 连接后端，本地默认 `http://localhost:18088/api`（与 Web 前台共用 nginx 网关；直连 8080 因缺少 `/api` 前缀会 403）。脚本会自动尝试打开微信开发者工具并导入项目（appid `wxb23c20ad538a6cea`）；若未安装开发者工具或路径未匹配，会跳过此步，**不影响**后端 / Web 启动。
 
 **常见排错**
 
@@ -104,7 +104,7 @@ mall-lite 提供了一套一键启动脚本：双击即可拉起全家桶（后�
 2. 端口被占用（18080 / 18088 / 18081 / 9092 等）→ 关闭占用进程，或修改 `docker-compose.yml` 端口映射后重启。
 3. 镜像拉不动（国内网络）→ 编辑 `.env` 将 `REGISTRY` 改为可用的镜像代理前缀（默认 `docker.1ms.run/library/`），再运行 `.\mall-lite.ps1 build`。
 4. 微信小程序未弹出 → 确认已安装微信开发者工具；脚本会扫描常见安装路径，未命中则只跳过小程序，后端 / Web 仍正常。
-5. Redis 未启动 → 仅打印 WARN，不影响地址 / 收藏 / 商品 / 订单等核心功能（见下「存储与配置」）。
+5. Redis 未启动 / 解析不到 `redis` → 秒杀、缓存等依赖 Redis 的接口会 500。mall-lite 自带 redis 已映射到宿主机 16379（避免与已占用的 6379 冲突），确保 `mall-lite-redis` 容器在运行；`docker compose up -d redis` 可拉起。
 
 **两种模式如何选择**
 

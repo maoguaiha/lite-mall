@@ -34,7 +34,9 @@ services:
     image: ${REGISTRY}redis:7-alpine
     container_name: mall-lite-redis
     ports:
-      - "6379:6379"
+      # 主机端口改为 16379，避免与已占用 6379 的其它 Redis 冲突；容器内部仍为 6379，
+      # 后端通过服务名 redis:6379 访问，不受主机端口影响。
+      - "16379:6379"
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - redis-data:/data

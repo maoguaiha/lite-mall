@@ -44,6 +44,9 @@ param(
 
 $ErrorActionPreference = "Stop"
 $root = $PSScriptRoot
+# 无论以何种方式启动（双击 run.bat、计划任务、后台进程），都切换到工程根目录，
+# 保证后续 mvn / npm / docker compose 都能在正确目录下执行。
+Set-Location $root
 
 # Double-click runs close the window instantly on error; trap + pause avoids that.
 trap {
@@ -295,20 +298,23 @@ switch ($Command) {
 
             Step "Starting mall-admin (:8081)"
             Start-Process -FilePath "java" -WorkingDirectory (Join-Path $root "mall-admin") `
-                -ArgumentList "-jar", $adminJar `
+                -ArgumentList "-jar", $adminJar, "--spring.datasource.url=jdbc:h2:tcp://localhost:9092/./mall-shared;MODE=MySQL", "--spring.datasource.username=sa", "--spring.datasource.password=123456" `
                 -RedirectStandardOutput (Join-Path $logs "mall-admin.log") `
                 -RedirectStandardError (Join-Path $logs "mall-admin.err") `
                 -NoNewWindow -PassThru | ForEach-Object { $_.Id | Out-File (Join-Path $pids "mall-admin.pid") }
 
             Step "Starting mall-portal (:8080)"
+            # --spring.* 是应用参数，必须放在 -jar 之后（Java 启动器会把 -jar 前的参数当作 JVM 选项）
             Start-Process -FilePath "java" -WorkingDirectory (Join-Path $root "mall-portal") `
-                -ArgumentList "-jar", $portalJar `
+                -ArgumentList "-jar", $portalJar, "--spring.datasource.url=jdbc:h2:tcp://localhost:9092/./mall-shared;MODE=MySQL", "--spring.datasource.username=sa", "--spring.datasource.password=123456" `
                 -RedirectStandardOutput (Join-Path $logs "mall-portal.log") `
                 -RedirectStandardError (Join-Path $logs "mall-portal.err") `
                 -NoNewWindow -PassThru | ForEach-Object { $_.Id | Out-File (Join-Path $pids "mall-portal.pid") }
 
             Step "Starting frontend dev server (:8088)"
-            Start-Process -FilePath "npm" -ArgumentList "--prefix", "mall-lite-frontend", "run", "dev" `
+            # npm 在 Windows 上是 npm.cmd（批处理），不能直接用 Start-Process 启动（会报
+            # "不是有效的 Win32 应用程序"）。改用 cmd /c 来调用，由 cmd.exe 解释执行。
+            Start-Process -FilePath "cmd.exe" -ArgumentList "/c", "npm --prefix mall-lite-frontend run dev" `
                 -RedirectStandardOutput (Join-Path $logs "frontend.log") `
                 -RedirectStandardError (Join-Path $logs "frontend.err") `
                 -NoNewWindow -PassThru | ForEach-Object { $_.Id | Out-File (Join-Path $pids "frontend.pid") }

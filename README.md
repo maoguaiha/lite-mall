@@ -132,9 +132,8 @@ java -jar target/mall-portal-1.0-SNAPSHOT.jar
 
 ### 存储与配置
 
-- **数据库**：H2 文件库，物理路径 `mall-lite/mall-shared`（`jdbc:h2:file:../mall-shared;AUTO_SERVER=TRUE`）。
-  建表脚本 `schema-h2.sql` + `schema-modules.sql` 在应用启动时自动执行；收藏表 `ums_member_favorite_product` 即在此初始化。
-- **Redis**：`localhost:6379`，仅用于秒杀库存预热（`SeckillStockInitializer`）。未启动时会打印 WARN 且不影响地址 / 收藏 / 商品 / 订单等核心功能。
+- **数据库**：默认使用内置 H2。经脚本启动（docker / host 模式）时，后端统一连接 **H2 TCP 服务**（`jdbc:h2:tcp://localhost:9092/./mall-shared`，docker 模式在容器网络内为 `tcp://h2:9092`，由 `docker-compose` 的 `h2` 服务提供）；仅脱离脚本纯本地 `java -jar` 运行时才回落到文件库 `mall-lite/mall-shared`（`jdbc:h2:file:../mall-shared;AUTO_SERVER=TRUE`）。建表脚本 `schema-h2.sql` + `schema-modules.sql` 在应用启动时自动执行；收藏表 `ums_member_favorite_product` 即在此初始化。
+- **Redis**：`localhost:6379`（docker 模式为内置 `mall-lite-redis`，宿主映射 **16379**），用于秒杀库存预热 / 缓存（`SeckillStockInitializer`）。Redis 不可达时秒杀预热会打印 WARN，地址 / 收藏 / 商品 / 订单等核心接口不受影响。
 - **微信登录**：`mall-portal/src/main/resources/application.yml` 的 `wechat.appid` / `wechat.secret`。
 - **JWT**：`jwt.secret` / `jwt.expire`（默认 24h）。
 

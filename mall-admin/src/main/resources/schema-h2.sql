@@ -1,13 +1,5 @@
-DROP TABLE IF EXISTS ums_member_level;
-DROP TABLE IF EXISTS ums_member;
-DROP TABLE IF EXISTS pms_product_category;
-DROP TABLE IF EXISTS pms_product_sku;
-DROP TABLE IF EXISTS pms_product;
-DROP TABLE IF EXISTS cms_cart_item;
-DROP TABLE IF EXISTS oms_order_item;
-DROP TABLE IF EXISTS oms_order;
 
-CREATE TABLE ums_member (
+CREATE TABLE IF NOT EXISTS ums_member (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     member_level_id BIGINT DEFAULT 1,
     username VARCHAR(100) NOT NULL UNIQUE,
@@ -30,7 +22,7 @@ CREATE TABLE ums_member (
     history_integration INT DEFAULT 0
 );
 
-CREATE TABLE ums_member_level (
+CREATE TABLE IF NOT EXISTS ums_member_level (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     growth_point INT DEFAULT 0,
@@ -47,7 +39,7 @@ CREATE TABLE ums_member_level (
     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE pms_product_category (
+CREATE TABLE IF NOT EXISTS pms_product_category (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(200) NOT NULL,
     parent_id BIGINT DEFAULT 0,
@@ -60,7 +52,7 @@ CREATE TABLE pms_product_category (
     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE pms_product (
+CREATE TABLE IF NOT EXISTS pms_product (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     category_id BIGINT DEFAULT 0,
     brand_id BIGINT DEFAULT 0,
@@ -83,7 +75,7 @@ CREATE TABLE pms_product (
     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE pms_product_sku (
+CREATE TABLE IF NOT EXISTS pms_product_sku (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     product_id BIGINT NOT NULL,
     sku_code VARCHAR(100) NOT NULL,
@@ -99,7 +91,7 @@ CREATE TABLE pms_product_sku (
 
 CREATE INDEX idx_product_sku_product_id ON pms_product_sku(product_id);
 
-CREATE TABLE cms_cart_item (
+CREATE TABLE IF NOT EXISTS cms_cart_item (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     member_id BIGINT NOT NULL,
     product_id BIGINT NOT NULL,
@@ -116,7 +108,7 @@ CREATE TABLE cms_cart_item (
 
 CREATE INDEX idx_cart_item_member_id ON cms_cart_item(member_id);
 
-CREATE TABLE oms_order (
+CREATE TABLE IF NOT EXISTS oms_order (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     order_sn VARCHAR(100) NOT NULL UNIQUE,
     member_id BIGINT NOT NULL,
@@ -143,7 +135,7 @@ CREATE TABLE oms_order (
 
 CREATE INDEX idx_order_member_id ON oms_order(member_id);
 
-CREATE TABLE oms_order_item (
+CREATE TABLE IF NOT EXISTS oms_order_item (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     order_id BIGINT NOT NULL,
     order_sn VARCHAR(100) NOT NULL,

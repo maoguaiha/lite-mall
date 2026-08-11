@@ -16,7 +16,10 @@ spring:
     init:
       mode: always
       schema-locations: classpath:schema-h2.sql,classpath*:schema-modules.sql
-      data-locations: classpath:data-h2.sql,classpath*:data-modules.sql
+      # 与 mall-portal 共享同一 H2 数据库：portal 启动时已建表+加载数据；
+      # admin 只需确保缺失的 admin 专属表存在（schema-h2.sql 已改为 CREATE TABLE IF NOT EXISTS），
+      # 不再加载 data-locations，避免主键冲突 / 数据覆盖。
+      data-locations: ''
   h2:
     console:
       enabled: true

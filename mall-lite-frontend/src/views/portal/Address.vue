@@ -16,13 +16,13 @@
       <el-table-column label="默认" width="100">
         <template #default="{ row }">
           <el-tag v-if="row.isDefault === 1" type="success">默认</el-tag>
-          <el-button v-else type="text" @click="setDefault(row.id)">设为默认</el-button>
+          <el-button v-else link @click="setDefault(row.id)">设为默认</el-button>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="160">
         <template #default="{ row }">
-          <el-button type="text" @click="openEdit(row)">编辑</el-button>
-          <el-button type="text" @click="remove(row.id)">删除</el-button>
+          <el-button link @click="openEdit(row)">编辑</el-button>
+          <el-button link @click="remove(row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

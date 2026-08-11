@@ -7,7 +7,7 @@
         height="auto"
         :interval="5000"
         arrow="always"
-        indicator-position="inside"
+        indicator-position="outside"
       >
         <el-carousel-item v-for="(b, i) in banners" :key="i">
           <div class="banner" :style="{ background: b.bg }">

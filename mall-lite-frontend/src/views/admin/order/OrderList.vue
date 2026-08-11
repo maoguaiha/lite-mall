@@ -44,9 +44,9 @@
         <el-table-column prop="createTime" label="下单时间" width="180" />
         <el-table-column label="操作" width="200">
           <template #default="{ row }">
-            <el-button type="text" @click="handleView(row.id)">查看</el-button>
-            <el-button v-if="row.status === 1" type="text" @click="handleShip(row)">发货</el-button>
-            <el-button v-if="row.status === 0" type="text" @click="handleRefund(row)">退款</el-button>
+            <el-button link @click="handleView(row.id)">查看</el-button>
+            <el-button v-if="row.status === 1" link @click="handleShip(row)">发货</el-button>
+            <el-button v-if="row.status === 0" link @click="handleRefund(row)">退款</el-button>
           </template>
         </el-table-column>
       </el-table>

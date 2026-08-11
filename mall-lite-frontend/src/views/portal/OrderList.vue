@@ -57,9 +57,9 @@
               <span class="order-total">合计：<strong>¥{{ order.totalAmount }}</strong></span>
               <div class="order-actions">
                 <el-button v-if="order.status === 0" type="primary" @click="handlePay(order.id)">去支付</el-button>
-                <el-button v-if="order.status === 0" type="text" @click="handleCancel(order.id)">取消订单</el-button>
+                <el-button v-if="order.status === 0" link @click="handleCancel(order.id)">取消订单</el-button>
                 <el-button v-if="order.status === 1" type="primary" @click="handleReceive(order.id)">确认收货</el-button>
-                <el-button v-if="order.status === 2" type="text" @click="goToDetail(order.id)">查看详情</el-button>
+                <el-button v-if="order.status === 2" link @click="goToDetail(order.id)">查看详情</el-button>
               </div>
             </div>
           </div>

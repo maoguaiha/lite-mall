@@ -30,7 +30,7 @@
         <el-table-column prop="createTime" label="注册时间" width="180" />
         <el-table-column label="操作" width="120">
           <template #default="{ row }">
-            <el-button type="text" @click="handleView(row)">查看详情</el-button>
+            <el-button link @click="handleView(row)">查看详情</el-button>
           </template>
         </el-table-column>
       </el-table>

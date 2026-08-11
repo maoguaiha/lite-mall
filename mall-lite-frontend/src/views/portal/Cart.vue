@@ -54,7 +54,7 @@
               </span>
               <span class="col-total">¥{{ (item.price * item.quantity).toFixed(2) }}</span>
               <span class="col-action">
-                <el-button type="text" @click="handleDelete(item.id)">删除</el-button>
+                <el-button link @click="handleDelete(item.id)">删除</el-button>
               </span>
             </div>
           </div>
@@ -83,8 +83,10 @@ import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { ShoppingCart, User, Search } from '@element-plus/icons-vue'
 import { getCartList, updateCartItem, deleteCartItem, clearCart } from '@/api/cart'
+import { useMemberStore } from '@/stores/member'
 
 const router = useRouter()
+const memberStore = useMemberStore()
 const searchText = ref('')
 const searchVisible = ref(false)
 const searchInputRef = ref(null)
@@ -163,6 +165,11 @@ onMounted(() => {
 })
 
 function loadCart() {
+  // 未登录时后端 /cart/list 返回 403，直接展示 mock 数据，避免无谓请求
+  if (!memberStore.isLoggedIn) {
+    useMockCart()
+    return
+  }
   getCartList().then(res => {
     cartItems.value = res.data || mockCartItems
     cartItems.value.forEach(item => {
@@ -170,11 +177,16 @@ function loadCart() {
     })
     updateSelectAll()
   }).catch(() => {
-    cartItems.value = mockCartItems
-    cartItems.value.forEach(item => {
-      item.selected = true
-    })
+    useMockCart()
   })
+}
+
+function useMockCart() {
+  cartItems.value = mockCartItems
+  cartItems.value.forEach(item => {
+    item.selected = true
+  })
+  updateSelectAll()
 }
 
 const mockCartItems = [

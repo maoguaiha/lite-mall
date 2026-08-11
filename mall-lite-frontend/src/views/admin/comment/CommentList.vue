@@ -17,10 +17,10 @@
       </el-table-column>
       <el-table-column label="操作" width="200">
         <template #default="{ row }">
-          <el-button type="text" :disabled="row.status === 2" @click="audit(row.id, 2)">
+          <el-button link :disabled="row.status === 2" @click="audit(row.id, 2)">
             通过
           </el-button>
-          <el-button type="text" :disabled="row.status === 3" @click="audit(row.id, 3)">
+          <el-button link :disabled="row.status === 3" @click="audit(row.id, 3)">
             拒绝
           </el-button>
         </template>

@@ -15,8 +15,8 @@
       <el-table-column prop="receivedCount" label="已领" width="80" />
       <el-table-column label="操作" width="220">
         <template #default="{ row }">
-          <el-button type="text" @click="viewHistories(row.id)">发放记录</el-button>
-          <el-button type="text" @click="remove(row.id)">删除</el-button>
+          <el-button link @click="viewHistories(row.id)">发放记录</el-button>
+          <el-button link @click="remove(row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

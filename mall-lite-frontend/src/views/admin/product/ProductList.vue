@@ -32,8 +32,8 @@
         </el-table-column>
         <el-table-column label="操作" width="200">
           <template #default="{ row }">
-            <el-button type="text" @click="goToEdit(row.id)">编辑</el-button>
-            <el-button type="text" @click="handleDelete(row.id)">删除</el-button>
+            <el-button link @click="goToEdit(row.id)">编辑</el-button>
+            <el-button link @click="handleDelete(row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
